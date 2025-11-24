@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #f8fafc; /* slate-50 */
+  --foreground: #0f172a; /* slate-900 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .glass-card {
+    @apply rounded-xl bg-white/15 backdrop-blur-2xl shadow-sm dark:bg-white/5;
+  }
+  .skeleton {
+    @apply relative overflow-hidden bg-slate-200/60 dark:bg-white/10;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    );
+    animation: skeleton-shimmer 1.25s infinite;
+  }
+  .glass-border {
+    background:
+      linear-gradient(rgba(255,255,255,0.42), rgba(255,255,255,0.26)) padding-box,
+      linear-gradient(180deg, rgba(255,255,255,0.25), rgba(255,255,255,0.08)) border-box;
+    border: 1px solid transparent;
+    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.10); /* strengthen border in light mode */
+  }
+  .glass-nav {
+    @apply backdrop-blur-2xl;
+    background:
+      linear-gradient(rgba(255,255,255,0.28), rgba(255,255,255,0.16)) padding-box,
+      linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06)) border-box;
+    border: 1px solid transparent;
+  }
+  .dark .glass-border {
+    background:
+      linear-gradient(rgba(10,10,10,0.25), rgba(10,10,10,0.12)) padding-box,
+      linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05)) border-box;
+    border: 1px solid transparent;
+  }
+  .dark .glass-nav {
+    background:
+      linear-gradient(rgba(10,10,10,0.22), rgba(10,10,10,0.12)) padding-box,
+      linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04)) border-box;
+    border: 1px solid transparent;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(20px, -30px) scale(1.05);
+  }
+  66% {
+    transform: translate(-25px, 10px) scale(0.97);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 14s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
